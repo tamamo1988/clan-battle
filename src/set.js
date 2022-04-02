@@ -611,7 +611,7 @@ async function Sign_Database(msg, text){
 
 async function Read_File(filename){
 	console.log(filename);
-	console.log(server_url);
+	//console.log(server_url);
 
 	let data = '';
 
@@ -626,7 +626,7 @@ async function Read_File(filename){
 	}
 
 	await request(options, function (error, response, body) {
-		console.log(body);
+		//console.log(body);
 		//console.log(error);
 		//console.log(response);
 		body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
@@ -638,12 +638,12 @@ async function Read_File(filename){
 			data += `${Body[i]}\n`;
 		}
 	});
-	console.log("-------------");
-	console.log(data);
+	//console.log("-------------");
+	//console.log(data);
 	return await data;
 }
 
-function Write_File(filename, datatext){
+async function Write_File(filename, datatext){
 
 	// ファイル記入
 	let options = {
@@ -656,7 +656,7 @@ function Write_File(filename, datatext){
 		}
 	}
 
-	request(options, function (error, response, body) {
+	await request(options, function (error, response, body) {
 	});
 }
 
