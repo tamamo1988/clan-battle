@@ -609,7 +609,7 @@ async function Read_File(filename){
 
 	let data = '';
 	let file = '.replit';
-	if( fs.existsSync(file) ){	// サーバー側
+	/*if( fs.existsSync(file) ){	// サーバー側
 		data = await db.get(filename);
 		/*if( fs.existsSync(filename) ){
 			data = fs.readFileSync( filename, 'utf8');
@@ -623,7 +623,7 @@ async function Read_File(filename){
 			data = data.replace(/\r/g, '');
 		}
 		data = data.replace(/\r/g, '');
-	}
+	}*/
 
 	return data;
 }
@@ -631,7 +631,7 @@ async function Read_File(filename){
 async function Write_File(filename, datatext){
 
 	// ファイル記入
-	try{
+	/*try{
 		let data = '';
 		let file = '.replit';
 		//console.log("a:" + filename +":" + datatext)
@@ -644,7 +644,7 @@ async function Write_File(filename, datatext){
 	}
 	catch(e){
 		console.log("Write_File error:" + filename);
-	}
+	}*/
 }
 
 function Set_Id(msg){
