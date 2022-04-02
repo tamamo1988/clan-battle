@@ -67,9 +67,9 @@ client.once('ready', async message =>
 	
 	let command_data = await com.Command_Func(cmd.Boss_Name);	// コマンドデータ
 	//console.log(command_data);
-	All_Guild_Id.forEach(async function(item, index, array) {
+	/*All_Guild_Id.forEach(async function(item, index, array) {
 		await client.application.commands.set(command_data, item);
-	});
+	});*/
 
 	cmd.start_day = cmd.start_day[0];	// 儀式
 	cmd.period = cmd.period[0];			// 儀式
