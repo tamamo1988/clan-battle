@@ -637,10 +637,10 @@ function Read_File(filename){
 		for(let i = 0; i < Body.length; i++ ){
 			data += `${Body[i]}\n`;
 		}
+		console.log("-------------");
+		console.log(data);
+		return data;
 	});
-	console.log("-------------");
-	console.log(data);
-	return data;
 }
 
 function Write_File(filename, datatext){
