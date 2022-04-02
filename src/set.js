@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const request = require('request-promise');
+const request = require('request');
 
 require('dotenv').config();
 const server_url = process.env.SERVER_URL;
