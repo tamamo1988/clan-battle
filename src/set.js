@@ -611,10 +611,10 @@ async function Read_File(filename){
 	let file = '.replit';
 	/*if( fs.existsSync(file) ){	// サーバー側
 		data = await db.get(filename);
-		/*if( fs.existsSync(filename) ){
+		if( fs.existsSync(filename) ){
 			data = fs.readFileSync( filename, 'utf8');
 			data = data.replace(/\r/g, '');
-		}*/
+		}
 		if( data == null ){ data = ''; }
 	}
 	else{						// ローカル側
