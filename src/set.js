@@ -208,9 +208,9 @@ async function Start_Func(msg, text){
 		let battle_schedule = "common_data" + "\/" + year + month;
 
 		// ディレクトリを親ごと作成する
-		fs.mkdirSync( battle_schedule, { recursive: true }, (err) => {
+		/*fs.mkdirSync( battle_schedule, { recursive: true }, (err) => {
 				if (err) throw err;
-		});
+		});*/
 
 		let data_text = '';
 		DataAry = DataAry.filter(Boolean);	// 空白削除
@@ -417,10 +417,10 @@ function Time_Get(flag, type, value){
 	// 日付と時間取得
 	let today_data = new Date();
 	// サーバーで変わるので運用する時は入れる。ローカルの時はこれで
-	let file = '.replit';
-	if( fs.existsSync(file) ){
-		today_data.setTime(today_data.getTime() + 1000*60*60*9);// JSTに変換 サーバーによっては必要なし
-	}
+	//let file = '.replit';
+	//if( fs.existsSync(file) ){
+	today_data.setTime(today_data.getTime() + 1000*60*60*9);// JSTに変換 サーバーによっては必要なし
+	//}
 
 	if( type == 'day' ){	// 1000(コンマ)*60(秒)*60(分)*24(時間)
 		today_data.setTime(today_data.getTime() + 1000*60*60*24*value)
@@ -462,10 +462,10 @@ function Folder(dirctory_name){
 
 	let battle_schedule = dirctory_name + "\/" + year + month;
 
-	// ディレクトリを親ごと作成する
-	fs.mkdirSync( battle_schedule, { recursive: true }, (err) => {
+	// ディレクトリを親ごと作成する heroku 使用不可
+	/*fs.mkdirSync( battle_schedule, { recursive: true }, (err) => {
     	if (err) throw err;
-	});
+	});*/
 
 	return battle_schedule;
 }
@@ -518,17 +518,16 @@ async function Copy_File(last_file, next_file, file_name){
 	last_file += `/${file_name}`;
 	next_file += `/${file_name}`;
 
-	//let data = await db.get(last_file);
+	// ファイル読み込み
 	let data = await Read_File(last_file)
 
-	// サーバーのデータベースにコピー
-	//await db.set(next_file, data);
+	// ファイル書き換え
 	await Write_File(next_file, data);
-
 }
 
+// ローカルファイルデータをデータベースにコピー　※heroku使用不可
 async function Copy_Database(msg, text){
-
+/*
 	text = text.replace(/　/g, " ");	// 全角スペースを半角に
 	text = text.replace(/ +/g, " ");	// 半角スペースが複数あったらひとつに
 	text = text.replace(/\//g, "");	// スラッシュ削除
@@ -562,11 +561,12 @@ async function Copy_Database(msg, text){
 	else{
 		msg.reply("弟くん、ここでそのコマンドは使えないよ")
 	}
-
+*/
 }
 
+// データベースをローカルファイルデータにコピー　※heroku使用不可
 async function Sign_Database(msg, text){
-
+/*
 	text = text.replace(/　/g, " ");	// 全角スペースを半角に
 	text = text.replace(/ +/g, " ");	// 半角スペースが複数あったらひとつに
 	text = text.replace(/\//g, "");	// スラッシュ削除
@@ -606,7 +606,7 @@ async function Sign_Database(msg, text){
 	else{
 		msg.reply("弟くん、ここでそのコマンドは使えないよ")
 	}
-
+*/
 }
 
 async function Read_File(filename){
