@@ -20,18 +20,18 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const fs = require('fs');
-const cmd = require('./set');
-const com = require('./command');
-const intcmd = require('./interaction.js');
-const membercmd = require('./member');
-const bosscmd = require('./boss');
-const calccmd = require('./calc');
-const damagecmd = require('./damage');
-const procmd = require('./progress');
-const checkcmd = require('./check');
-const reacmd = require('./reaction');
-const nowcmd = require('./now');
-const infocmd = require('./info');
+const cmd = require('./src/set');
+const com = require('./src/command');
+const intcmd = require('./src/interaction');
+const membercmd = require('./src/member');
+const bosscmd = require('./src/boss');
+const calccmd = require('./src/calc');
+const damagecmd = require('./src/damage');
+const procmd = require('./src/progress');
+const checkcmd = require('./src/check');
+const reacmd = require('./src/reaction');
+const nowcmd = require('./src/now');
+const infocmd = require('./src/info');
 
 let guild_id;									// リクエストに使うギルドID
 let All_Guild_Id = new Array();					// 入れてるギルドID全部を拾うやつ
