@@ -1,36 +1,12 @@
 'use strict';
 
-
 const fs = require('fs');
+const request = require('request-promise');
+
 require('dotenv').config();
-
-/*const { Client } = require('pg');
-
-const pg = new Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATBASE,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
-
-// 接続
-pg.connect();
-
-const query = {
-    text: 'INSERT INTO users(name, email) VALUES($1, $2)',
-    values: ['太郎', 'mytest@samplel.com'],
-}
-
-pg.query(query)
-  .then(res => console.log(res.rows[0]))
-  .catch(e => console.error(e.stack))
-
-*/
-
+const server_url = process.env.SERVER_URL;
+const server_user = process.env.SERVER_USER;
+const server_pass = process.env.SERVER_PASS;
 
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -636,34 +612,44 @@ async function Sign_Database(msg, text){
 async function Read_File(filename){
 
 	let data = '';
-	/*data = await db.get(filename);
-	if( fs.existsSync(filename) ){
-		data = fs.readFileSync( filename, 'utf8');
-		data = data.replace(/\r/g, '');
-	}
-	if( data == null ){ data = ''; }
-	}*/
 
-	return data;
+	let options = {
+		url: server_url,  method: 'POST',
+		auth: {
+			user: server_user,  password: server_pass
+		},
+		form: {
+			"mode": "readfile",  "file": file_name
+		}
+	}
+
+	request(options, async function (error, response, body) {
+		body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
+		body = body.replace(/\n /g, '\n');				// 不要な空白を削除
+		let Body = body.split(/\n/);
+		Body = Body.filter(Boolean);	// 空白削除
+		Body.shift();					// 先頭削除（※広告）
+		for(let i = 0; i < Body.length; i++ ){
+			data += `${Body[i]}\n`;
+		}
+	});
 }
 
 async function Write_File(filename, datatext){
 
 	// ファイル記入
-	/*try{
-		let data = '';
-		let file = '.replit';
-		//console.log("a:" + filename +":" + datatext)
-		if( fs.existsSync(file) ){	// サーバー側
-			await db.set(filename, datatext);
+	let options = {
+		url: server_url,  method: 'POST',
+		auth: {
+			user: server_user,  password: server_pass
+		},
+		form: {
+			"mode": "writefile",  "file": file_name, "data": datatext
 		}
-		//console.log("b:" + filename +":" + datatext)
-		// 念のためサーバー側でもローカル側でもファイルは保存しておく
-		fs.writeFileSync(filename, datatext);
 	}
-	catch(e){
-		console.log("Write_File error:" + filename);
-	}*/
+
+	request(options, async function (error, response, body) {
+	});
 }
 
 function Set_Id(msg){
