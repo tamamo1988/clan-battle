@@ -1,8 +1,36 @@
 'use strict';
 
+
 const fs = require('fs');
-//const Database = require("@replit/database");
-//const db = new Database();
+require('dotenv').config();
+
+const { Client } = require('pg');
+
+const pg = new Client({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATBASE,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+// 接続
+pg.connect();
+
+const query = {
+    text: 'INSERT INTO users(name, email) VALUES($1, $2)',
+    values: ['太郎', 'mytest@samplel.com'],
+}
+
+pg.query(query)
+  .then(res => console.log(res.rows[0]))
+  .catch(e => console.error(e.stack))
+
+
+
 
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -608,22 +636,13 @@ async function Sign_Database(msg, text){
 async function Read_File(filename){
 
 	let data = '';
-	let file = '.replit';
-	/*if( fs.existsSync(file) ){	// サーバー側
-		data = await db.get(filename);
-		if( fs.existsSync(filename) ){
-			data = fs.readFileSync( filename, 'utf8');
-			data = data.replace(/\r/g, '');
-		}
-		if( data == null ){ data = ''; }
-	}
-	else{						// ローカル側
-		if( fs.existsSync(filename) ){
-			data = fs.readFileSync( filename, 'utf8');
-			data = data.replace(/\r/g, '');
-		}
+	data = await db.get(filename);
+	if( fs.existsSync(filename) ){
+		data = fs.readFileSync( filename, 'utf8');
 		data = data.replace(/\r/g, '');
-	}*/
+	}
+	if( data == null ){ data = ''; }
+	}
 
 	return data;
 }
