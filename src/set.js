@@ -619,7 +619,7 @@ async function Read_File(filename){
 			user: server_user,  password: server_pass
 		},
 		form: {
-			"mode": "readfile",  "file": file_name
+			"mode": "readfile",  "file": filename
 		}
 	}
 
@@ -644,7 +644,7 @@ async function Write_File(filename, datatext){
 			user: server_user,  password: server_pass
 		},
 		form: {
-			"mode": "writefile",  "file": file_name, "data": datatext
+			"mode": "writefile",  "file": filename, "data": datatext
 		}
 	}
 
