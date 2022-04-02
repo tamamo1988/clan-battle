@@ -268,7 +268,7 @@ async function Channel_Check(msg){
 	let data = '';
 	let datafile = "common_data\/" + 'channel_id.txt';
 	data = await cmd.Read_File(datafile);
-	console.log("info:" + data);
+	//console.log("info:" + data);
 
 	let ValueAry;
 	let DataAry = data.split('\n');
