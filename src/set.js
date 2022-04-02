@@ -636,13 +636,13 @@ async function Sign_Database(msg, text){
 async function Read_File(filename){
 
 	let data = '';
-	data = await db.get(filename);
+	/*data = await db.get(filename);
 	if( fs.existsSync(filename) ){
 		data = fs.readFileSync( filename, 'utf8');
 		data = data.replace(/\r/g, '');
 	}
 	if( data == null ){ data = ''; }
-	}
+	}*/
 
 	return data;
 }
