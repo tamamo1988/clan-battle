@@ -634,6 +634,8 @@ async function Read_File(filename){
 			data += `${Body[i]}\n`;
 		}
 	});
+	console.log("-------------");
+	console.log(data);
 }
 
 async function Write_File(filename, datatext){
