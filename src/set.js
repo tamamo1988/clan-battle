@@ -640,7 +640,7 @@ async function Read_File(filename){
 	});
 	console.log("-------------");
 	console.log(data);
-	return data;
+	return await data;
 }
 
 function Write_File(filename, datatext){
