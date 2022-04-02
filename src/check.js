@@ -280,10 +280,12 @@ async function Channel_Check(msg){
 		if( msg.guildId == guild_id ){
 			// このチャンネルが入力可能なものであることを返す
 			if( msg.channel.id == channel_id && name == 'command' ){
+				console.log("Channel OK!")
 				return true;
 			}
 		}
 	}
+	console.log("Channel NG...")
 	return false;
 }
 
