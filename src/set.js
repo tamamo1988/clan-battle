@@ -609,7 +609,7 @@ async function Sign_Database(msg, text){
 
 }
 
-async function Read_File(filename){
+function Read_File(filename){
 	console.log(filename);
 	console.log(server_url);
 
@@ -625,7 +625,7 @@ async function Read_File(filename){
 		}
 	}
 
-	request(options, async function (error, response, body) {
+	request(options, function (error, response, body) {
 		console.log(body);
 		//console.log(error);
 		//console.log(response);
@@ -643,7 +643,7 @@ async function Read_File(filename){
 	return data;
 }
 
-async function Write_File(filename, datatext){
+function Write_File(filename, datatext){
 
 	// ファイル記入
 	let options = {
@@ -656,7 +656,7 @@ async function Write_File(filename, datatext){
 		}
 	}
 
-	request(options, async function (error, response, body) {
+	request(options, function (error, response, body) {
 	});
 }
 
