@@ -610,6 +610,7 @@ async function Sign_Database(msg, text){
 }
 
 async function Read_File(filename){
+	console.log(filename);
 
 	let data = '';
 
