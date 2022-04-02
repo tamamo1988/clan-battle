@@ -78,7 +78,7 @@ client.once('ready', async message =>
 });
 
 // 時限コマンド
-setInterval(async function () {
+/*setInterval(async function () {
 
 	let [year, month, day, hours, minutes, second] = cmd.Time_Get(true);
 
@@ -113,9 +113,7 @@ setInterval(async function () {
 		}
 	}
 }, 60000);	// 1分ごと
-
-
-	//var testtest = JSON.stringify(event);		// 書き換え
+*/
 
 // イベント（主にリアクションボタンの処理）
 client.on('raw', async event => {
