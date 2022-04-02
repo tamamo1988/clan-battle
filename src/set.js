@@ -625,6 +625,9 @@ async function Read_File(filename){
 	}
 
 	request(options, async function (error, response, body) {
+		console.log(body);
+		console.log(error);
+		console.log(response);
 		body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
 		body = body.replace(/\n /g, '\n');				// 不要な空白を削除
 		let Body = body.split(/\n/);
