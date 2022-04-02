@@ -268,6 +268,7 @@ async function Channel_Check(msg){
 	let data = '';
 	let datafile = "common_data\/" + 'channel_id.txt';
 	data = await cmd.Read_File(datafile);
+	console.log(data);
 
 	let ValueAry;
 	let DataAry = data.split('\n');
@@ -277,6 +278,7 @@ async function Channel_Check(msg){
 		let name = ValueAry[0];			// チャンネルタイプ名
 		let guild_id = ValueAry[1];		// ギルドID
 		let channel_id = ValueAry[2];	// チャンネルID
+		console.log(name, guild_id, channel_id);
 		if( msg.guildId == guild_id ){
 			// このチャンネルが入力可能なものであることを返す
 			if( msg.channel.id == channel_id && name == 'command' ){
