@@ -611,6 +611,7 @@ async function Sign_Database(msg, text){
 
 async function Read_File(filename){
 	console.log(filename);
+	console.log(server_url);
 
 	let data = '';
 
@@ -625,7 +626,7 @@ async function Read_File(filename){
 	}
 
 	request(options, async function (error, response, body) {
-		//console.log(body);
+		console.log(body);
 		//console.log(error);
 		//console.log(response);
 		body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
