@@ -1,0 +1,26 @@
+{
+  "name": "priconne",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "node-update": "npm i --save-dev node@16 && npm config set prefix=$(pwd)/node_modules/node && export PATH=$(pwd)/node_modules/node/bin:$PATH",
+    "node-clean": "rm -rf node_modules && rm package-lock.json && npm cache clear --force && npm cache clean --force && npm i",
+    "node-update-then-clean": "npm run node-update && npm run node-clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node": "^16.6.1"
+  },
+  "dependencies": {
+    "date-utils": "^1.2.21",
+    "discord.js": "^13.1.0",
+    "dotenv": "^16.0.0",
+    "ftp": "^0.3.10",
+    "google-spreadsheet": "^3.1.15",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
