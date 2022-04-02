@@ -226,8 +226,7 @@ async function Info_Text(msg, mode, dm_flag){
 	datafile = 'common_data/info_manual.txt';
 	data = await cmd.Read_File(datafile);
 	let SubAry = data.split('\n');
-	console.log(data);
-
+	
 	DataAry = DataAry.concat(SubAry);
 	DataAry = DataAry.filter(Boolean);	// 空白削除
 
