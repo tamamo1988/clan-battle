@@ -4,7 +4,7 @@
 const fs = require('fs');
 require('dotenv').config();
 
-const { Client } = require('pg');
+/*const { Client } = require('pg');
 
 const pg = new Client({
   user: process.env.DB_USER,
@@ -29,7 +29,7 @@ pg.query(query)
   .then(res => console.log(res.rows[0]))
   .catch(e => console.error(e.stack))
 
-
+*/
 
 
 // 疑似wait
