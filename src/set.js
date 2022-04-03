@@ -683,7 +683,7 @@ function Set_Id(msg){
 	return [user_id, user_name];
 }
 
-module.exports = {
+exports = {
 	Init_Data,
 	Start_Func,
 	Level_Func,
