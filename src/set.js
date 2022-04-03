@@ -11,6 +11,11 @@ const server_pass = process.env.SERVER_PASS;
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// 共通データのフォルダ指定＆今日の日付指定
+let [year, month, day, hours, minutes, second] = Time_Get();
+month = ( '00' + month ).slice( -2 );
+let common_data = "common_data" + "\/" + year + month;
+
 // ---------- set変数 ----------
 let today = '';
 let start_day = [];
