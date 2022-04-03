@@ -11,32 +11,29 @@ const server_pass = process.env.SERVER_PASS;
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// 初期設定
-async function Setting(){
+// 共通データのフォルダ指定＆今日の日付指定
+let [year, month, day, hours, minutes, second] = Time_Get();
+month = ( '00' + month ).slice( -2 );
+let common_data = "common_data" + "\/" + year + month;
 
-	// 共通データのフォルダ指定＆今日の日付指定
-	let [year, month, day, hours, minutes, second] = Time_Get();
-	month = ( '00' + month ).slice( -2 );
-	let common_data = "common_data" + "\/" + year + month;
+exports.today = day;
+if( hours >= 0 && hours < 5 ){	// 0時～5時なら前日の日付扱い
+	exports.today--;
+}
 
-	exports.today = day;
-	if( hours >= 0 && hours < 5 ){	// 0時～5時なら前日の日付扱い
-		exports.today--;
-	}
+// ---------- ファイル読み込み初期設定 ----------
 
-	// ---------- ファイル読み込み初期設定 ----------
+let data = '';
+let file = '';
+let DataAry = new Array;
 
-	let data = '';
-	let file = '';
-	let DataAry = new Array;
+// ---------- 開始日及び周回数と段階進行リスト ----------
+let start_day = [];
+let period = [];
+let Level_List = new Array();
 
-	// ---------- 開始日及び周回数と段階進行リスト ----------
-	let start_day = [];
-	let period = [];
-	let Level_List = new Array();
-
-	file = common_data + "\/" + 'day.txt';
-	//(async () => {
+file = common_data + "\/" + 'day.txt';
+(async () => {
 	try {
 		data = await Read_File(file);
 		console.log(data);
@@ -59,17 +56,17 @@ async function Setting(){
 		console.log(e)
 		console.log("day error")
 	}
-	//})();
-	data = '';
+})();
+data = '';
 
-	// ---------- ボスの名前及びボスのHPの初期設定 ----------
-	let BOSS_HP = new Array();		// ボスの各段階HP
-	let Boss_Name = new Array();	// ボスの名前
-	let Boss_Icon = new Array();	// ボスの名前
-	let BOSS_NO = new Array();		// ボスの番号（名前から連想）
+// ---------- ボスの名前及びボスのHPの初期設定 ----------
+let BOSS_HP = new Array();		// ボスの各段階HP
+let Boss_Name = new Array();	// ボスの名前
+let Boss_Icon = new Array();	// ボスの名前
+let BOSS_NO = new Array();		// ボスの番号（名前から連想）
 
-	file = common_data + "\/" + 'boss.txt';
-	//(async () => {
+file = common_data + "\/" + 'boss.txt';
+(async () => {
 	try {
 		data = await Read_File(file);
 		let BossAry;
@@ -93,20 +90,18 @@ async function Setting(){
 		console.log("boss error")
 			// Deal with the fact the chain failed
 	}
-	//})();
-	data = '';
+})();
+data = '';
 
-	// ---------- 以降、関数とその他 ----------
+// ---------- 以降、関数とその他 ----------
 
-	let BUTTON_FLAG = [];						// 選択肢のフラグ
+let BUTTON_FLAG = [];						// 選択肢のフラグ
+start_day[0] = 5;
 
-	// 呼び鈴＆初期化を使える人
-	const master = {
-	"361143557915934722" : 1,
-	"595978283661656070" : 1 };
-	
-	return await data;
-}
+// 呼び鈴＆初期化を使える人
+const master = {
+"361143557915934722" : 1,
+"595978283661656070" : 1 };
 
 // 初期化
 async function Init_Data(msg){
