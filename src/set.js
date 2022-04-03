@@ -21,19 +21,35 @@ if( hours >= 0 && hours < 5 ){	// 0時～5時なら前日の日付扱い
 	exports.today--;
 }
 
-// ---------- ファイル読み込み初期設定 ----------
-
-let data = '';
-let file = '';
-let DataAry = new Array;
-
-// ---------- 開始日及び周回数と段階進行リスト ----------
+// ---------- set変数 ----------
 let start_day = [];
 let period = [];
 let Level_List = new Array();
+let BOSS_HP = new Array();		// ボスの各段階HP
+let Boss_Name = new Array();	// ボスの名前
+let Boss_Icon = new Array();	// ボスの名前
+let BOSS_NO = new Array();		// ボスの番号（名前から連想）
+let BUTTON_FLAG = [];						// 選択肢のフラグ
 
-file = common_data + "\/" + 'day.txt';
-(async () => {
+// 呼び鈴＆初期化を使える人
+const master = {
+"361143557915934722" : 1,
+"595978283661656070" : 1 };
+
+// 初期設定
+async function Setting(){
+	// ---------- ファイル読み込み初期設定 ----------
+	let data = '';
+	let file = '';
+	let DataAry = new Array;
+
+	// ---------- 開始日及び周回数と段階進行リスト ----------
+	let start_day = [];
+	let period = [];
+	let Level_List = new Array();
+
+	file = common_data + "\/" + 'day.txt';
+	//(async () => {
 	try {
 		data = await Read_File(file);
 		console.log(data);
@@ -57,17 +73,16 @@ file = common_data + "\/" + 'day.txt';
 		console.log("day error")
 	}
 	return await data;
-})();
-data = '';
+	//})();
+	data = '';
 
-// ---------- ボスの名前及びボスのHPの初期設定 ----------
-let BOSS_HP = new Array();		// ボスの各段階HP
-let Boss_Name = new Array();	// ボスの名前
-let Boss_Icon = new Array();	// ボスの名前
-let BOSS_NO = new Array();		// ボスの番号（名前から連想）
+	// ---------- ボスの名前及びボスのHPの初期設定 ----------
+	let BOSS_HP = new Array();		// ボスの各段階HP
+	let Boss_Name = new Array();	// ボスの名前
+	let Boss_Icon = new Array();	// ボスの名前
+	let BOSS_NO = new Array();		// ボスの番号（名前から連想）
 
-file = common_data + "\/" + 'boss.txt';
-(async () => {
+	file = common_data + "\/" + 'boss.txt';
 	try {
 		data = await Read_File(file);
 		let BossAry;
@@ -92,18 +107,11 @@ file = common_data + "\/" + 'boss.txt';
 			// Deal with the fact the chain failed
 	}
 	return await data;
-})();
-data = '';
-
-_sleep(10);
+	data = '';
+	
+	return await [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO];
+}
 // ---------- 以降、関数とその他 ----------
-
-let BUTTON_FLAG = [];						// 選択肢のフラグ
-
-// 呼び鈴＆初期化を使える人
-const master = {
-"361143557915934722" : 1,
-"595978283661656070" : 1 };
 
 // 初期化
 async function Init_Data(msg){
@@ -700,6 +708,7 @@ module.exports = {
 	Read_File,
 	Write_File,
 	Set_Id,
+	Setting,
 	// ここから変数
 	start_day,
 	period,
