@@ -106,9 +106,7 @@ async function Setting(){
 		console.log("boss error")
 			// Deal with the fact the chain failed
 	}
-	return await data;
 	data = '';
-	
 	return await [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO];
 }
 // ---------- 以降、関数とその他 ----------
