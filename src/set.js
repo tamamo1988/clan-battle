@@ -33,7 +33,7 @@ let period = [];
 let Level_List = new Array();
 
 file = common_data + "\/" + 'day.txt';
-(async () => {
+//(async () => {
 	try {
 		data = await Read_File(file);
 		let ValAry;
@@ -55,7 +55,7 @@ file = common_data + "\/" + 'day.txt';
 		console.log(e)
 		console.log("day error")
 	}
-})();
+//})();
 data = '';
 
 // ---------- ボスの名前及びボスのHPの初期設定 ----------
@@ -697,10 +697,7 @@ module.exports = {
 	Folder,
 	Read_File,
 	Write_File,
-	Set_Id
-}
-
-exports = {
+	Set_Id,
 	// ここから変数
 	start_day,
 	period,
@@ -712,4 +709,3 @@ exports = {
 	BOSS_NO,
 	BUTTON_FLAG
 }
-
