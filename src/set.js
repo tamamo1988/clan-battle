@@ -72,7 +72,6 @@ async function Setting(){
 		console.log(e)
 		console.log("day error")
 	}
-	return await data;
 	//})();
 	data = '';
 
