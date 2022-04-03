@@ -78,6 +78,7 @@ client.on('ready', async message =>
 	cmd.period = cmd.period[0];			// 儀式
 	console.log('bot is ready!!!');
 	console.log(cmd.start_day);
+	console.log(cmd.today);
 });
 
 // 時限コマンド
