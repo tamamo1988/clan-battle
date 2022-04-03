@@ -76,6 +76,8 @@ client.on('ready', async message =>
 
 	console.log("boss_name");	
 	console.log(cmd.Boss_Name);	
+	console.log("cmd.boss_name");	
+	console.log(Boss_Name);	
 	console.log("start_day");	
 	console.log(cmd.start_day);	
 	console.log("period");	
