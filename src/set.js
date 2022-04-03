@@ -643,8 +643,8 @@ async function Read_File(filename){
 			}
 		}
 	});
-	console.log("-------------");
-	console.log(data);
+	//console.log("-------------");
+	//console.log(data);
 	return await data;
 }
 
