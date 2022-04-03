@@ -74,15 +74,18 @@ client.on('ready', async message =>
 	cmd.BOSS_HP = BOSS_HP;			// 儀式
 	cmd.Level_List = Level_List;			// 儀式
 
+	console.log("boss_name");	
 	console.log(cmd.Boss_Name);	
+	console.log("start_day");	
 	console.log(cmd.start_day);	
+	console.log("period");	
 	console.log(cmd.period);	
 	
 	let command_data = await com.Command_Func(cmd.Boss_Name);	// コマンドデータ
 	//console.log(command_data);
-	All_Guild_Id.forEach(async function(item, index, array) {
+	/*All_Guild_Id.forEach(async function(item, index, array) {
 		await client.application.commands.set(command_data, item);
-	});
+	});*/
 
 	console.log('bot is ready!!!');
 	console.log(cmd.start_day);
