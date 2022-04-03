@@ -35,7 +35,7 @@ let Level_List = new Array();
 file = common_data + "\/" + 'day.txt';
 //(async () => {
 	try {
-		data = await Read_File(file);
+		data = Read_File(file);
 		let ValAry;
 		if( data != '' ){
 			DataAry = data.split("\n");
