@@ -95,10 +95,10 @@ file = common_data + "\/" + 'boss.txt';
 })();
 data = '';
 
+_sleep(10);
 // ---------- 以降、関数とその他 ----------
 
 let BUTTON_FLAG = [];						// 選択肢のフラグ
-start_day[0] = 5;
 
 // 呼び鈴＆初期化を使える人
 const master = {
