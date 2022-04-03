@@ -56,9 +56,6 @@ file = common_data + "\/" + 'day.txt';
 		console.log("day error")
 	}
 })();
-exports.start_day = start_day;
-exports.period = period;
-
 data = '';
 
 // ---------- ボスの名前及びボスのHPの初期設定 ----------
@@ -93,9 +90,6 @@ file = common_data + "\/" + 'boss.txt';
 			// Deal with the fact the chain failed
 	}
 })();
-exports.Boss_Name = Boss_Name;
-exports.BOSS_NO = BOSS_NO;
-exports.BOSS_HP = BOSS_HP;
 data = '';
 
 
