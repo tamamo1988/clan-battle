@@ -95,7 +95,7 @@ file = common_data + "\/" + 'boss.txt';
 })();
 exports.Boss_Name = Boss_Name;
 exports.BOSS_NO = BOSS_NO;
-exports.Boss_HP = Boss_HP;
+exports.BOSS_HP = BOSS_HP;
 data = '';
 
 
