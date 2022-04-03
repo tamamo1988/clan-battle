@@ -61,7 +61,7 @@ client.on('ready', async message =>
 	hours = ( '00' + hours ).slice( -2 );
 	minutes = ( '00' + minutes ).slice( -2 );
 
-	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = cmd.Setting();
+	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = await cmd.Setting();
 
 	client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
 		type: 'WATCHING'
