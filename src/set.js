@@ -36,6 +36,7 @@ file = common_data + "\/" + 'day.txt';
 //(async () => {
 	try {
 		data = Read_File(file);
+		console.log(data);
 		let ValAry;
 		if( data != '' ){
 			DataAry = data.split("\n");
