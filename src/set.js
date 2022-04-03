@@ -56,6 +56,7 @@ file = common_data + "\/" + 'day.txt';
 		console.log(e)
 		console.log("day error")
 	}
+	return await data;
 })();
 data = '';
 
@@ -90,6 +91,7 @@ file = common_data + "\/" + 'boss.txt';
 		console.log("boss error")
 			// Deal with the fact the chain failed
 	}
+	return await data;
 })();
 data = '';
 
