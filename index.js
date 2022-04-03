@@ -52,9 +52,8 @@ const events = {
 };
 
 // Botの準備が完了したタイミング（ready）で、Botに何かをさせたいとき
-client.once('ready', async message =>
+client.on('ready', async message =>
 {
-	const cmd = require('./src/set');
 	All_Guild_Id = await client.guilds.cache.map(guild => guild.id);
 
 	// 日付と時間取得
