@@ -33,9 +33,9 @@ let period = [];
 let Level_List = new Array();
 
 file = common_data + "\/" + 'day.txt';
-//(async () => {
+(async () => {
 	try {
-		data = Read_File(file);
+		data = await Read_File(file);
 		console.log(data);
 		let ValAry;
 		if( data != '' ){
@@ -56,7 +56,7 @@ file = common_data + "\/" + 'day.txt';
 		console.log(e)
 		console.log("day error")
 	}
-//})();
+})();
 data = '';
 
 // ---------- ボスの名前及びボスのHPの初期設定 ----------
