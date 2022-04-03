@@ -11,17 +11,8 @@ const server_pass = process.env.SERVER_PASS;
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// 共通データのフォルダ指定＆今日の日付指定
-let [year, month, day, hours, minutes, second] = Time_Get();
-month = ( '00' + month ).slice( -2 );
-let common_data = "common_data" + "\/" + year + month;
-
-exports.today = day;
-if( hours >= 0 && hours < 5 ){	// 0時～5時なら前日の日付扱い
-	exports.today--;
-}
-
 // ---------- set変数 ----------
+let today = '';
 let start_day = [];
 let period = [];
 let Level_List = new Array();
@@ -52,7 +43,7 @@ async function Setting(){
 	//(async () => {
 	try {
 		data = await Read_File(file);
-		console.log(data);
+		//console.log(data);
 		let ValAry;
 		if( data != '' ){
 			DataAry = data.split("\n");
@@ -707,6 +698,7 @@ module.exports = {
 	Set_Id,
 	Setting,
 	// ここから変数
+	today,
 	start_day,
 	period,
 	master,
