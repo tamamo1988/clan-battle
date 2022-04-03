@@ -698,7 +698,6 @@ module.exports = {
 	Read_File,
 	Write_File,
 	Set_Id,
-	Setting,
 	// ここから変数
 	start_day,
 	period,
