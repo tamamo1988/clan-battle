@@ -629,13 +629,18 @@ async function Read_File(filename){
 		//console.log(body);
 		//console.log(error);
 		//console.log(response);
-		body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
-		body = body.replace(/\n /g, '\n');				// 不要な空白を削除
-		let Body = body.split(/\n/);
-		Body = Body.filter(Boolean);	// 空白削除
-		Body.shift();					// 先頭削除（※広告）
-		for(let i = 0; i < Body.length; i++ ){
-			data += `${Body[i]}\n`;
+		if( body.match(/オープンに失敗しました/) ){
+			// オープン失敗時　特になし
+		}
+		else{
+			body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
+			body = body.replace(/\n /g, '\n');				// 不要な空白を削除
+			let Body = body.split(/\n/);
+			Body = Body.filter(Boolean);	// 空白削除
+			Body.shift();					// 先頭削除（※広告）
+			for(let i = 0; i < Body.length; i++ ){
+				data += `${Body[i]}\n`;
+			}
 		}
 	});
 	console.log("-------------");
