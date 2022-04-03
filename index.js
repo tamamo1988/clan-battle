@@ -61,9 +61,19 @@ client.on('ready', async message =>
 	hours = ( '00' + hours ).slice( -2 );
 	minutes = ( '00' + minutes ).slice( -2 );
 
+	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = Setting();
+
 	client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
 		type: 'WATCHING'
 	});
+	cmd.start_day = start_day[0];	// 儀式
+	cmd.period = period[0];			// 儀式
+	cmd.Boss_Name = Boss_Name;			// 儀式
+	cmd.BOSS_NO = BOSS_NO;			// 儀式
+	cmd.Boss_Icon = Boss_Icon;			// 儀式
+	cmd.BOSS_HP = BOSS_HP;			// 儀式
+	cmd.Level_List = Level_List;			// 儀式
+
 	console.log(cmd.Boss_Name);	
 	console.log(cmd.start_day);	
 	console.log(cmd.period);	
@@ -74,8 +84,6 @@ client.on('ready', async message =>
 		await client.application.commands.set(command_data, item);
 	});
 
-	cmd.start_day = cmd.start_day[0];	// 儀式
-	cmd.period = cmd.period[0];			// 儀式
 	console.log('bot is ready!!!');
 	console.log(cmd.start_day);
 	console.log(cmd.today);
