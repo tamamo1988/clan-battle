@@ -683,7 +683,7 @@ function Set_Id(msg){
 	return [user_id, user_name];
 }
 
-exports = {
+module.exports = {
 	Init_Data,
 	Start_Func,
 	Level_Func,
@@ -697,7 +697,10 @@ exports = {
 	Folder,
 	Read_File,
 	Write_File,
-	Set_Id,
+	Set_Id
+}
+
+exports = {
 	// ここから変数
 	start_day,
 	period,
