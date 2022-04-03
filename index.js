@@ -21,18 +21,18 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 const fs = require('fs');
-const cmd = require('./src/set');
-const com = require('./src/command');
-const intcmd = require('./src/interaction');
-const membercmd = require('./src/member');
-const bosscmd = require('./src/boss');
-const calccmd = require('./src/calc');
-const damagecmd = require('./src/damage');
-const procmd = require('./src/progress');
-const checkcmd = require('./src/check');
-const reacmd = require('./src/reaction');
-const nowcmd = require('./src/now');
-const infocmd = require('./src/info');
+const cmd = require('./src/set.js');
+const com = require('./src/command.js');
+const intcmd = require('./src/interaction.js');
+const membercmd = require('./src/member.js');
+const bosscmd = require('./src/boss.js');
+const calccmd = require('./src/calc.js');
+const damagecmd = require('./src/damage.js');
+const procmd = require('./src/progress.js');
+const checkcmd = require('./src/check.js');
+const reacmd = require('./src/reaction.js');
+const nowcmd = require('./src/now.js');
+const infocmd = require('./src/info.js');
 
 let guild_id;									// リクエストに使うギルドID
 let All_Guild_Id = new Array();					// 入れてるギルドID全部を拾うやつ
@@ -64,6 +64,9 @@ client.on('ready', async message =>
 	client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
 		type: 'WATCHING'
 	});
+	console.log(cmd.Boss_Name);	
+	console.log(cmd.start_day);	
+	console.log(cmd.period);	
 	
 	let command_data = await com.Command_Func(cmd.Boss_Name);	// コマンドデータ
 	//console.log(command_data);
