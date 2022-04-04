@@ -8,6 +8,18 @@ const server_url = process.env.SERVER_URL;
 const server_user = process.env.SERVER_USER;
 const server_pass = process.env.SERVER_PASS;
 
+const { Client } = require('pg');
+// DB_URLを使用
+const pg = new Client({
+	connectionString: process.env.DB_URL,
+	ssl: {
+		rejectUnauthorized: false
+	}
+});
+
+// DB(0)を使うかWEBサーバー(1)使うか
+let local = '0';
+
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -618,34 +630,50 @@ async function Read_File(filename){
 
 	let data = '';
 
-	let options = {
-		url: server_url,  method: 'POST',
-		auth: {
-			user: server_user,  password: server_pass
-		},
-		form: {
-			"mode": "readfile",  "file": filename
+	if( local == 0 ){
+		const query = {
+		    name: 'key',
+		    text: 'SELECT * FROM clandata WHERE key = $1',
+		    values: [filename],
 		}
-	}
 
-	await request(options, function (error, response, body) {
-		//console.log(body);
-		//console.log(error);
-		//console.log(response);
-		if( body.match(/オープンに失敗しました/) ){
-			// オープン失敗時　特になし
-		}
-		else{
-			body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
-			body = body.replace(/\n /g, '\n');				// 不要な空白を削除
-			let Body = body.split(/\n/);
-			Body = Body.filter(Boolean);	// 空白削除
-			Body.shift();					// 先頭削除（※広告）
-			for(let i = 0; i < Body.length; i++ ){
-				data += `${Body[i]}\n`;
+		await pg.connect();
+		let result = await pg.query(query);
+		//console.log(result.rows);
+		data = result["rows"][0]["value"];
+
+		pg.on('drain', pg.end.bind(pg));	// 接続終了
+	}
+	else{
+		let options = {
+			url: server_url,  method: 'POST',
+			auth: {
+				user: server_user,  password: server_pass
+			},
+			form: {
+				"mode": "readfile",  "file": filename
 			}
 		}
-	});
+
+		await request(options, function (error, response, body) {
+			//console.log(body);
+			//console.log(error);
+			//console.log(response);
+			if( body.match(/オープンに失敗しました/) ){
+				// オープン失敗時　特になし
+			}
+			else{
+				body = body.replace(/<(.*?)>/g, '');			// 不要な文字を削除
+				body = body.replace(/\n /g, '\n');				// 不要な空白を削除
+				let Body = body.split(/\n/);
+				Body = Body.filter(Boolean);	// 空白削除
+				Body.shift();					// 先頭削除（※広告）
+				for(let i = 0; i < Body.length; i++ ){
+					data += `${Body[i]}\n`;
+				}
+			}
+		});
+	}
 	//console.log("-------------");
 	//console.log(data);
 	return await data;
@@ -653,19 +681,56 @@ async function Read_File(filename){
 
 async function Write_File(filename, datatext){
 
-	// ファイル記入
-	let options = {
-		url: server_url,  method: 'POST',
-		auth: {
-			user: server_user,  password: server_pass
-		},
-		form: {
-			"mode": "writefile",  "file": filename, "data": datatext
-		}
-	}
+	if( local == 0 ){
+		await pg.connect();	// データベース接続
 
-	await request(options, function (error, response, body) {
-	});
+		let query = {
+		    name: 'key',
+		    text: 'SELECT * FROM clandata WHERE key = $1',
+		    values: [filename],
+		}
+		// クエリー送信
+		let result = await pg.query(query);
+		//console.log(result);
+		console.log(result.rowCount);
+
+		// データが存在する（UPDATE）
+		if( result.rowCount > 0 ){
+			query = {
+			    text: 'UPDATE clandata SET value = $2 WHERE key = $1',
+			    values: [filename, datatext],
+			}
+		}
+		// データが存在しない(INSERT INTO)
+		else{
+			query = {
+			    text: 'INSERT INTO clandata(key, value) VALUES($1, $2)',
+			    values: [filename, datatext],
+			}
+		}
+
+		// クエリー送信
+		pg.query(query)	
+		  .then(res => console.log(res.rows[0]))
+		  .catch(e => console.error(e.stack))
+
+		pg.on('drain', pg.end.bind(pg));	// 接続終了
+	}
+	else{
+		// ファイル記入
+		let options = {
+			url: server_url,  method: 'POST',
+			auth: {
+				user: server_user,  password: server_pass
+			},
+			form: {
+				"mode": "writefile",  "file": filename, "data": datatext
+			}
+		}
+
+		await request(options, function (error, response, body) {
+		});
+	}
 }
 
 function Set_Id(msg){
