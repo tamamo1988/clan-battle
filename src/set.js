@@ -192,7 +192,7 @@ async function Start_Func(msg, text){
 
 	// ---------- 開始日及び周回数と段階進行リスト ----------
 	file = common_data + "\/" + 'day.txt';
-	data = await Read_File(file);
+	let data = await Read_File(file);
 
 	data = data.replace(/\r/g, '');
 	DataAry = data.split("\n");
@@ -299,7 +299,7 @@ async function Level_Func(msg, text){
 
 	// ---------- 開始日及び周回数と段階進行リスト ----------
 	file = common_data + "\/" + 'day.txt';
-	data = await Read_File(file);
+	let data = await Read_File(file);
 
 	data = data.replace(/\r/g, '');
 	DataAry = data.split("\n");
