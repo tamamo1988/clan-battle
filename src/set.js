@@ -48,7 +48,7 @@ const master = {
 async function Setting(){
 
 	// データベース接続
-	await pg.connect((err) => {
+	/*await pg.connect((err) => {
 		//エラー時の処理
 		if(err){
 			console.log('error connecting:' + err.stack);
@@ -56,7 +56,7 @@ async function Setting(){
 		}
 		//接続成功時の処理
 		console.log('success');
-	});
+	});*/
 
 	// ---------- ファイル読み込み初期設定 ----------
 	let data = '';
@@ -652,7 +652,7 @@ async function Read_File(filename){
 		}
 
 		// --------  接続  -----------
-		/*await pg.connect((err) => {
+		await pg.connect((err) => {
 			//エラー時の処理
 			if(err){
 				console.log('error connecting:' + err.stack);
@@ -660,7 +660,7 @@ async function Read_File(filename){
 			}
 			//接続成功時の処理
 			console.log('success');
-		});*/
+		});
 		//await pg.connect();
 		let result = await pg.query(query);
 		//console.log(result.rows);
@@ -672,7 +672,7 @@ async function Read_File(filename){
 		else{
 		}
 
-		//await pg.end();
+		await pg.end();
 		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
@@ -714,7 +714,7 @@ async function Write_File(filename, datatext){
 
 	if( local == 0 ){
 		// --------  接続  -----------
-		/*await pg.connect((err) => {
+		await pg.connect((err) => {
 			//エラー時の処理
 			if(err){
 				console.log('error connecting:' + err.stack);
@@ -722,7 +722,7 @@ async function Write_File(filename, datatext){
 			}
 			//接続成功時の処理
 			console.log('success');
-		});*/
+		});
 
 		let query = {
 		    name: 'key',
@@ -754,7 +754,7 @@ async function Write_File(filename, datatext){
 		  .then(res => console.log(res.rows[0]))
 		  .catch(e => console.error(e.stack))
 
-		//await pg.end();
+		await pg.end();
 		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
