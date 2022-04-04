@@ -639,7 +639,17 @@ async function Read_File(filename){
 		    values: [filename],
 		}
 
-		await pg.connect();
+		// --------  接続  -----------
+		pg.connect((err) => {
+			//エラー時の処理
+			if(err){
+				console.log('error connecting:' + err.stack);
+				return;
+			}
+			//接続成功時の処理
+			console.log('success');
+		});
+		//await pg.connect();
 		let result = await pg.query(query);
 		//console.log(result.rows);
 		// データが存在する
@@ -690,7 +700,16 @@ async function Read_File(filename){
 async function Write_File(filename, datatext){
 
 	if( local == 0 ){
-		await pg.connect();	// データベース接続
+		// --------  接続  -----------
+		pg.connect((err) => {
+			//エラー時の処理
+			if(err){
+				console.log('error connecting:' + err.stack);
+				return;
+			}
+			//接続成功時の処理
+			console.log('success');
+		});
 
 		let query = {
 		    name: 'key',
