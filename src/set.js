@@ -71,7 +71,9 @@ async function Setting(){
 	file = common_data + "\/" + 'day.txt';
 	//(async () => {
 	//try {
+		console.log("A------------------")
 		data = await Read_File(file);
+		console.log("B------------------")
 		//console.log(data);
 		let ValAry;
 		if( data != '' ){
@@ -103,7 +105,9 @@ async function Setting(){
 
 	file = common_data + "\/" + 'boss.txt';
 	//try {
+		console.log("A'------------------")
 		data = await Read_File(file);
+		console.log("B'------------------")
 		let BossAry;
 		if( data != '' ){
 			DataAry = data.split('\n');
