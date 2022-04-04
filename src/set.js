@@ -640,7 +640,13 @@ async function Read_File(filename){
 		await pg.connect();
 		let result = await pg.query(query);
 		//console.log(result.rows);
-		data = result["rows"][0]["value"];
+		// データが存在する
+		if( result.rowCount > 0 ){
+			data = result["rows"][0]["value"];
+		}
+		// データが存在しない
+		else{
+		}
 
 		pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
