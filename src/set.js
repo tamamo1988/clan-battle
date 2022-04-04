@@ -660,8 +660,8 @@ async function Read_File(filename){
 		else{
 		}
 
-		await pg.end();
-		//pg.on('drain', pg.end.bind(pg));	// 接続終了
+		//await pg.end();
+		pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
 		let options = {
@@ -742,8 +742,8 @@ async function Write_File(filename, datatext){
 		  .then(res => console.log(res.rows[0]))
 		  .catch(e => console.error(e.stack))
 
-		await pg.end();
-		//pg.on('drain', pg.end.bind(pg));	// 接続終了
+		//await pg.end();
+		pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
 		// ファイル記入
