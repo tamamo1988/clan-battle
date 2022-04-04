@@ -70,7 +70,7 @@ async function Setting(){
 
 	file = common_data + "\/" + 'day.txt';
 	//(async () => {
-	try {
+	//try {
 		data = await Read_File(file);
 		//console.log(data);
 		let ValAry;
@@ -87,11 +87,11 @@ async function Setting(){
 		for( let j = 0; j < ValAry.length; j++ ){
 			Level_List[j] = ValAry[j];
 		}
-	} catch (e) {
+	/*} catch (e) {
 		// Deal with the fact the chain failed
 		console.log(e)
 		console.log("day error")
-	}
+	}*/
 	//})();
 	data = '';
 
@@ -102,7 +102,7 @@ async function Setting(){
 	let BOSS_NO = new Array();		// ボスの番号（名前から連想）
 
 	file = common_data + "\/" + 'boss.txt';
-	try {
+	//try {
 		data = await Read_File(file);
 		let BossAry;
 		if( data != '' ){
@@ -121,10 +121,10 @@ async function Setting(){
 				BOSS_HP[hash_key] = BossAry[j];
 			}
 		}
-	} catch (e) {
+	/*} catch (e) {
 		console.log("boss error")
-			// Deal with the fact the chain failed
-	}
+		// Deal with the fact the chain failed
+	}*/
 	console.log(Level_List);
 	console.log(Boss_Name);
 	data = '';
