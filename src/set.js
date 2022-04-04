@@ -640,7 +640,7 @@ async function Read_File(filename){
 		}
 
 		// --------  接続  -----------
-		pg.connect((err) => {
+		await pg.connect((err) => {
 			//エラー時の処理
 			if(err){
 				console.log('error connecting:' + err.stack);
@@ -660,7 +660,8 @@ async function Read_File(filename){
 		else{
 		}
 
-		pg.on('drain', pg.end.bind(pg));	// 接続終了
+		await pg.end();
+		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
 		let options = {
@@ -701,7 +702,7 @@ async function Write_File(filename, datatext){
 
 	if( local == 0 ){
 		// --------  接続  -----------
-		pg.connect((err) => {
+		await pg.connect((err) => {
 			//エラー時の処理
 			if(err){
 				console.log('error connecting:' + err.stack);
@@ -737,11 +738,12 @@ async function Write_File(filename, datatext){
 		}
 
 		// クエリー送信
-		pg.query(query)	
+		await pg.query(query)	
 		  .then(res => console.log(res.rows[0]))
 		  .catch(e => console.error(e.stack))
 
-		pg.on('drain', pg.end.bind(pg));	// 接続終了
+		await pg.end();
+		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
 	else{
 		// ファイル記入
