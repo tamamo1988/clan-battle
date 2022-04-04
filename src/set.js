@@ -168,6 +168,7 @@ async function Start_Func(msg, text){
 	month = ( '00' + month ).slice( -2 );
 	let common_data = "common_data" + "\/" + year + month;
 
+	let file = '';
 	let file_write_flag = 0;
 
 	// コマンドや名前などを算出
@@ -254,6 +255,7 @@ async function Level_Func(msg, text){
 	month = ( '00' + month ).slice( -2 );
 	let common_data = "common_data" + "\/" + year + month;
 
+	let file = '';
 	let file_write_flag = 0;
 
 	// コマンドや名前などを算出
@@ -315,6 +317,7 @@ async function Level_Func(msg, text){
 // クラバト用チャンネル設定
 async function Set_Channel(msg){
 
+	let file = '';
 	let Channel_Type = ['info','command','status','reserve']
 	let Channel_Text = ['情報用','コマンド入力用','残凸情報','簡易予約入力']
 
