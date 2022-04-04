@@ -93,7 +93,7 @@ async function Setting(){
 		console.log("day error")
 	}
 	//})();
-	data = '';
+	data = '';	DataAry = [];
 
 	// ---------- ボスの名前及びボスのHPの初期設定 ----------
 	let BOSS_HP = new Array();		// ボスの各段階HP
@@ -126,9 +126,9 @@ async function Setting(){
 		console.log("boss error")
 		// Deal with the fact the chain failed
 	}
-	console.log(Level_List);
-	console.log(Boss_Name);
-	data = '';
+	//console.log(Level_List);
+	//console.log(Boss_Name);
+	data = '';	DataAry = [];
 	return await [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO];
 }
 // ---------- 以降、関数とその他 ----------
