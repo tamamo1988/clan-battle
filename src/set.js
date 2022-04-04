@@ -317,7 +317,6 @@ async function Level_Func(msg, text){
 // クラバト用チャンネル設定
 async function Set_Channel(msg){
 
-	let file = '';
 	let Channel_Type = ['info','command','status','reserve']
 	let Channel_Text = ['情報用','コマンド入力用','残凸情報','簡易予約入力']
 
