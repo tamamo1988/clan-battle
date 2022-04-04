@@ -125,6 +125,8 @@ async function Setting(){
 		console.log("boss error")
 			// Deal with the fact the chain failed
 	}
+	console.log(Level_List);
+	console.log(Boss_Name);
 	data = '';
 	return await [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO];
 }
