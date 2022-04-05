@@ -664,43 +664,32 @@ async function Read_File(filename){
 	let data = '';
 
 	if( local == 0 ){
-		const query = {
-		    name: 'key',
-		    text: 'SELECT * FROM clandata WHERE key = $1',
-		    values: [filename],
-		}
-
-		// --------  接続  -----------
-		/*await pg.connect((err) => {
-			//エラー時の処理
-			if(err){
-				console.log('error connecting:' + err.stack);
-				return;
+		try{
+			const query = {
+			    name: 'key',
+			    text: 'SELECT * FROM clandata WHERE key = $1',
+			    values: [filename],
 			}
-			//接続成功時の処理
-			console.log('success');
-		});*/
-		//await pg.connect();
-		// コネクション取得
-		const connect = await pg.connect();
-		/*console.log("-------");
-		console.log(connect);
-		console.log("-------");*/
-		
-		let result = await connect.query(query);
-		//console.log(result.rows);
-		// データが存在する
-		if( result.rowCount > 0 ){
-			data = result["rows"][0]["value"];
-		}
-		// データが存在しない
-		else{
-		}
 
-		// コネクション返却
-		connect.release();
-		//await pg.end();
-		//pg.on('drain', pg.end.bind(pg));	// 接続終了
+			// --------  接続  -----------
+			// コネクション取得
+			const connect = await pg.connect();
+
+			let result = await connect.query(query);
+			// データが存在する
+			if( result.rowCount > 0 ){
+				data = result["rows"][0]["value"];
+			}
+			// データが存在しない
+			else{
+			}
+
+			// コネクション返却
+			connect.release();
+		}
+		catch(e){
+			console.log(e);
+		}
 	}
 	else{
 		let options = {
@@ -740,53 +729,45 @@ async function Read_File(filename){
 async function Write_File(filename, datatext){
 
 	if( local == 0 ){
-		// --------  接続  -----------
-		/*await pg.connect((err) => {
-			//エラー時の処理
-			if(err){
-				console.log('error connecting:' + err.stack);
-				return;
+		try{
+			// --------  接続  -----------
+			// コネクション取得
+			const connect = await pg.connect();
+
+			let query = {
+			    name: 'key',
+			    text: 'SELECT * FROM clandata WHERE key = $1',
+			    values: [filename],
 			}
-			//接続成功時の処理
-			console.log('success');
-		});*/
-		// コネクション取得
-		const connect = await pg.connect();
+			// クエリー送信
+			let result = await connect.query(query);
 
-		let query = {
-		    name: 'key',
-		    text: 'SELECT * FROM clandata WHERE key = $1',
-		    values: [filename],
-		}
-		// クエリー送信
-		let result = await connect.query(query);
-		//console.log(result);
-		console.log(result.rowCount);
-
-		// データが存在する（UPDATE）
-		if( result.rowCount > 0 ){
-			query = {
-			    text: 'UPDATE clandata SET value = $2 WHERE key = $1',
-			    values: [filename, datatext],
+			// データが存在する（UPDATE）
+			if( result.rowCount > 0 ){
+				query = {
+				    text: 'UPDATE clandata SET value = $2 WHERE key = $1',
+				    values: [filename, datatext],
+				}
 			}
-		}
-		// データが存在しない(INSERT INTO)
-		else{
-			query = {
-			    text: 'INSERT INTO clandata(key, value) VALUES($1, $2)',
-			    values: [filename, datatext],
+			// データが存在しない(INSERT INTO)
+			else{
+				query = {
+				    text: 'INSERT INTO clandata(key, value) VALUES($1, $2)',
+				    values: [filename, datatext],
+				}
 			}
+
+			// クエリー送信
+			await connect.query(query)	
+			  .then(res => console.log(res.rows[0]))
+			  .catch(e => console.error(e.stack))
+
+			// コネクション返却
+			connect.release();
 		}
-
-		// クエリー送信
-		await connect.query(query)	
-		  .then(res => console.log(res.rows[0]))
-		  .catch(e => console.error(e.stack))
-
-		// コネクション返却
-		connect.release();
-		//await pg.end();
-		//pg.on('drain', pg.end.bind(pg));	// 接続終了
+		catch(e){
+			console.log(e);
+		}
 	}
 	else{
 		// ファイル記入
