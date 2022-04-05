@@ -26,7 +26,7 @@ const connectionString = process.env.DB_URL;
 // DB情報をもったプールを生成 
 const pg = new Pool({
 	connectionString: connectionString,
-	max: 2,          // 保持するコネクション数
+	max: 5,          // 保持するコネクション数
 	ssl: {
 		rejectUnauthorized: false
 	}
