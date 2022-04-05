@@ -8,14 +8,30 @@ const server_url = process.env.SERVER_URL;
 const server_user = process.env.SERVER_USER;
 const server_pass = process.env.SERVER_PASS;
 
-const { Client } = require('pg');
+/*const { Client } = require('pg');
 // DB_URLを使用
 const pg = new Client({
 	connectionString: process.env.DB_URL,
 	ssl: {
 		rejectUnauthorized: false
 	}
+});*/
+
+// プール接続用
+const { Pool } = require("pg");
+
+// 接続先文字列
+const connectionString = process.env.DB_URL;
+
+// DB情報をもったプールを生成
+const pg = new Pool({
+	connectionString: connectionString,
+	max: 2,          // 保持するコネクション数
+	ssl: {
+		rejectUnauthorized: false
+	}
 });
+
 
 // DB(0)を使うかWEBサーバー(1)使うか
 let local = '0';
@@ -48,7 +64,7 @@ const master = {
 async function Setting(){
 
 	// データベース接続
-	await pg.connect((err) => {
+	/*await pg.connect((err) => {
 		//エラー時の処理
 		if(err){
 			console.log('error connecting:' + err.stack);
@@ -56,7 +72,7 @@ async function Setting(){
 		}
 		//接続成功時の処理
 		console.log('success');
-	});
+	});*/
 
 	// ---------- ファイル読み込み初期設定 ----------
 	let data = '';
@@ -665,6 +681,9 @@ async function Read_File(filename){
 			console.log('success');
 		});*/
 		//await pg.connect();
+		// コネクション取得
+		const connect = await pg.connect();
+		
 		let result = await pg.query(query);
 		//console.log(result.rows);
 		// データが存在する
@@ -675,6 +694,8 @@ async function Read_File(filename){
 		else{
 		}
 
+		// コネクション返却
+		connect.release();
 		//await pg.end();
 		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
@@ -726,6 +747,8 @@ async function Write_File(filename, datatext){
 			//接続成功時の処理
 			console.log('success');
 		});*/
+		// コネクション取得
+		const connect = await pg.connect();
 
 		let query = {
 		    name: 'key',
@@ -757,6 +780,8 @@ async function Write_File(filename, datatext){
 		  .then(res => console.log(res.rows[0]))
 		  .catch(e => console.error(e.stack))
 
+		// コネクション返却
+		connect.release();
 		//await pg.end();
 		//pg.on('drain', pg.end.bind(pg));	// 接続終了
 	}
