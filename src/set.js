@@ -687,7 +687,7 @@ async function Read_File(filename){
 		console.log(connect);
 		console.log("-------");*/
 		
-		let result = await pg.query(query);
+		let result = await connect.query(query);
 		//console.log(result.rows);
 		// データが存在する
 		if( result.rowCount > 0 ){
@@ -759,7 +759,7 @@ async function Write_File(filename, datatext){
 		    values: [filename],
 		}
 		// クエリー送信
-		let result = await pg.query(query);
+		let result = await connect.query(query);
 		//console.log(result);
 		console.log(result.rowCount);
 
@@ -779,7 +779,7 @@ async function Write_File(filename, datatext){
 		}
 
 		// クエリー送信
-		await pg.query(query)	
+		await connect.query(query)	
 		  .then(res => console.log(res.rows[0]))
 		  .catch(e => console.error(e.stack))
 
