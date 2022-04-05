@@ -683,6 +683,9 @@ async function Read_File(filename){
 		//await pg.connect();
 		// コネクション取得
 		const connect = await pg.connect();
+		console.log("-------");
+		console.log(connect);
+		console.log("-------");
 		
 		let result = await pg.query(query);
 		//console.log(result.rows);
