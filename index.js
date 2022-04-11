@@ -75,7 +75,7 @@ client.on('ready', async message =>
 		activities: [{
 			name: '/helpで解説 ' + hours + "時" + minutes + "分起床"
 		}],
-		type: "CUSTOM_STATUS",
+		type: "CUSTOM",
 		status: "online"
 	});
 	//+ client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
