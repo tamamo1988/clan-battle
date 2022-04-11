@@ -72,11 +72,13 @@ client.on('ready', async message =>
 		type: 'WATCHING'
 	});*/
 	client.user.setPresence({
-		activity: {
+		activities: [{
 			name: '/helpで解説 ' + hours + "時" + minutes + "分起床"
-		},
+		}],
 		status: "online"
 	});
+	//+ client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
+
 	cmd.start_day = start_day[0];	// 儀式
 	cmd.period = period[0];			// 儀式
 	cmd.Boss_Name = Boss_Name;			// 儀式
