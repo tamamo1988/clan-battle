@@ -68,15 +68,16 @@ client.on('ready', async message =>
 
 	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = await cmd.Setting();
 
-	client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
+	/*client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
 		type: 'CUSTOM'
-	});
-	/*client.user.setPresence({
+	});*/
+	client.user.setPresence({
 		activities: [{
 			name: '/helpで解説 ' + hours + "時" + minutes + "分起床"
 		}],
+		type: "CUSTOM_STATUS",
 		status: "online"
-	});*/
+	});
 	//+ client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
 
 	cmd.start_day = start_day[0];	// 儀式
