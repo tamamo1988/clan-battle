@@ -69,7 +69,7 @@ client.on('ready', async message =>
 	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = await cmd.Setting();
 
 	client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
-		type: 'CUSTOM_STATUS'
+		type: 'CUSTOM'
 	});
 	/*client.user.setPresence({
 		activities: [{
