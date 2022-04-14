@@ -217,7 +217,7 @@ async function Main_Name(msg, text){
 				file_write_flag = 1;
 				let regist_name = '';
 				if( msg.member.nickname == null ){	// サーバー内でニックネームがない
-					regist_name = user_name;
+					regist_name = msg.author.username;
 				}
 				else{								// サーバー内でニックネームがある
 					regist_name = msg.member.nickname;
