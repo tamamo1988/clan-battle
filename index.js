@@ -36,7 +36,7 @@ const infocmd = require('./src/info.js');
 
 let guild_id;									// リクエストに使うギルドID
 let All_Guild_Id = new Array();					// 入れてるギルドID全部を拾うやつ
-const DEFAULT_SERVER = '674861392930799639';	// とりあえずテストサーバー使う時
+const DEFAULT_SERVER = '674861392930799639';	// とりあえずテストサーバー使う時　
 
 // 疑似wait
 const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
