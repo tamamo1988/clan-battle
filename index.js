@@ -233,7 +233,7 @@ client.on('messageCreate', async message =>
 	}
 
 	// リプライに反応＆ただし自分自身は除く
-	if(msg.mentions.has(client.user) && msg.author != client.user)
+	if(msg.mentions.has(client.user.id) && msg.author != client.user)
 	{
 		let random = Math.floor(Math.random() * 9);
 		console.log(random);
