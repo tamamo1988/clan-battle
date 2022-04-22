@@ -31,7 +31,7 @@ async function Main_Name(msg, text){
 		return;
 	}
 
-	// メンバーデータ整理
+	// メンバーデータ整理 
 	DataAry = data.split('\n');
 	DataAry = DataAry.filter(Boolean);	// 空白削除
 	if( DataAry.length >= 30 && command == 'name_regist' ){
