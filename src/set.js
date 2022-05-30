@@ -9,9 +9,10 @@ const server_user = process.env.SERVER_USER;
 const server_pass = process.env.SERVER_PASS;
 
 /*const { Client } = require('pg');
-// DB_URLを使用
-const pg = new Client({
-	connectionString: process.env.DB_URL,
+// DB_URLを使用 
+const pg1 = new Client({
+	//connectionString: process.env.DB_URL,
+	connectionString: "postgres://pgsgheqcocohfr:0e7a4a7b0396e9316ac2b8f5db886b82af24eb4d34abd5b29cbceff5b120ca91@ec2-52-3-60-53.compute-1.amazonaws.com:5432/d3atsuktl0v0d3",
 	ssl: {
 		rejectUnauthorized: false
 	}
@@ -21,7 +22,8 @@ const pg = new Client({
 const { Pool } = require("pg");
 
 // 接続先文字列
-const connectionString = process.env.DB_URL;
+//const connectionString = process.env.DB_URL;
+const connectionString = 'postgres://pgsgheqcocohfr:0e7a4a7b0396e9316ac2b8f5db886b82af24eb4d34abd5b29cbceff5b120ca91@ec2-52-3-60-53.compute-1.amazonaws.com:5432/d3atsuktl0v0d3';
 
 // DB情報をもったプールを生成 
 const pg = new Pool({
@@ -64,10 +66,10 @@ const master = {
 async function Setting(){
 
 	// データベース接続
-	/*await pg.connect((err) => {
+	/*await pg1.connect((err) => {
 		//エラー時の処理
 		if(err){
-			console.log('error connecting:' + err.stack);
+			console.log('setting error connecting:' + err.stack);
 			return;
 		}
 		//接続成功時の処理
@@ -465,10 +467,10 @@ function Time_Get(flag, type, value){
 	// 日付と時間取得
 	let today_data = new Date();
 	// サーバーで変わるので運用する時は入れる。ローカルの時はこれで
-	//let file = '.replit';
-	//if( fs.existsSync(file) ){
-	today_data.setTime(today_data.getTime() + 1000*60*60*9);// JSTに変換 サーバーによっては必要なし
-	//}
+	let file = '.local';
+	if( !fs.existsSync(file) ){
+		today_data.setTime(today_data.getTime() + 1000*60*60*9);// JSTに変換 サーバーによっては必要なし
+	}
 
 	if( type == 'day' ){	// 1000(コンマ)*60(秒)*60(分)*24(時間)
 		today_data.setTime(today_data.getTime() + 1000*60*60*24*value)

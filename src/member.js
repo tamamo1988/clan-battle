@@ -31,7 +31,7 @@ async function Main_Name(msg, text){
 		return;
 	}
 
-	// メンバーデータ整理 
+	// メンバーデータ整理
 	DataAry = data.split('\n');
 	DataAry = DataAry.filter(Boolean);	// 空白削除
 	if( DataAry.length >= 30 && command == 'name_regist' ){
@@ -185,10 +185,12 @@ async function Main_Name(msg, text){
 		return;
 	}
 
-	// 登録するために名前が存在していた
+	// 登録処理
 	if( command == 'name_regist' ){
-		if( name_flag == 1 ){
-			if( name ){	// 名前が指定されている
+		// 登録するために名前が存在していた
+		// ※ここに名前が被っててもいい感じのやつがあれば…
+		if( name_flag == 1 ){	//
+			if( name ){	// 名前が追加入力されている
 	        	msg.reply(`その人はもう登録されてるよ`);
 				return;
 			}
@@ -197,8 +199,9 @@ async function Main_Name(msg, text){
 				return;
 			}
 		}
+		// 登録するために名前が存在していない
 		else{
-			if( name ){	// 名前が指定されている
+			if( name ){	// 名前が追加入力されている
 				if( DataAry_Sub[0] == undefined ){	// IDが指定されていない
 					msg.reply(`${name}くんを代理登録するのには18桁のIDが必要だよ`);
 					return;

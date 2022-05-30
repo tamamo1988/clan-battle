@@ -133,7 +133,7 @@ async function Interaction_Main(interaction, client){
 		await original_msg.delete()
 			.then()
 			.catch("delete error");
-		await calccmd.Main_Calc( user_msg , select_no );
+		await calccmd.Main_Calc( user_msg , msg_content, select_no );
 	}
 	else if(custom_id === 'del_select'){// 削除
 		let boss_no = ValueAry[5];		// 選んでいたボス
