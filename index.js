@@ -70,7 +70,7 @@ client.on('ready', async message =>
 
 	/*client.user.setActivity('/helpで解説 ' + hours + "時" + minutes + "分起床", {
 		type: 'CUSTOM'
-	});*/
+	});*/ 
 	client.user.setPresence({
 		activities: [{
 			name: '/helpで解説 ' + hours + "時" + minutes + "分起床"
@@ -293,9 +293,14 @@ client.on('messageCreate', async message =>
 		return;
 	}
 
-	// 処理を行うチャンネルではない
+	// チャンネルチェック
 	let check_flag = await checkcmd.Channel_Check(msg);
-	if( check_flag == false ){	return;	}
+	// 計算回りだけはスレッド内で行えるようにする
+	if( msg.channel.type == 'GUILD_PUBLIC_THREAD' && msg.content.match(/^\*/i) ){
+		// 素通り
+	}
+	// 処理を行うチャンネルではない
+	else if( check_flag == false ){	return;	}
 
 	// bot処理スタート
 	console.log("process start");
