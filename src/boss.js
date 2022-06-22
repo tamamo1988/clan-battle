@@ -7,7 +7,7 @@ const procmd = require('./progress');
 // ボスの名前関連
 async function Main_Boss(msg, text, other_name, set_day){
 
-	text = text.replace("　", " ");	// 全角スペースを半角に
+	text = text.replace("　", " ");	// 全角スペースを半角に 
 	text = text.replace(/ +/g, " ");	// 半角スペースが複数あったらひとつに
 	text = text.replace(/\//g, "");	// スラッシュ削除
 
