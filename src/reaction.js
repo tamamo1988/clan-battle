@@ -7,6 +7,8 @@ const checkcmd = require('./check');
 // リアクションの反応
 async function Reaction_Main( client, event, user){
 
+	console.log("log:Reaction_Main");
+	
 	const { d: data } = event;
 
 	const channel = client.channels.cache.get(data.channel_id) || await user.createDM();
@@ -29,7 +31,7 @@ async function Reaction_Main( client, event, user){
 		reaction = msg.reactions.cache.get(data.emoji.id);
 	}
 	console.log("emojiKey:" + emojiKey);
-	console.log("reaction:" + reaction);
+	console.log(reaction);
 	
 	let name = event.d.user_id;
 	//let users = reaction.message.guild.members.resolve(name)
