@@ -31,7 +31,7 @@ async function Reaction_Main( client, event, user){
 		reaction = msg.reactions.cache.get(data.emoji.id);
 	}
 	console.log("emojiKey:" + emojiKey);
-	console.log(reaction);
+	//console.log(reaction);
 	
 	let name = event.d.user_id;
 	//let users = reaction.message.guild.members.resolve(name)
