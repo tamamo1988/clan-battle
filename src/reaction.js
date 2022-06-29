@@ -28,12 +28,14 @@ async function Reaction_Main( client, event, user){
 	else{												 // カスタム絵文字
 		reaction = msg.reactions.cache.get(data.emoji.id);
 	}
+	console.log("emojiKey:" + emojiKey);
+	console.log("reaction:" + reaction);
 	
 	let name = event.d.user_id;
 	//let users = reaction.message.guild.members.resolve(name)
-	/*console.log(event);
+	//console.log(event);
 	console.log("name:" + name);
-	console.log("users:" + users);*/
+	//console.log("users:" + users);
 
 	let boss = '';
 
