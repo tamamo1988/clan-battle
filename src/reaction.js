@@ -7,42 +7,43 @@ const checkcmd = require('./check');
 // リアクションの反応
 async function Reaction_Main( client, event, user){
 
-	console.log("log:Reaction_Main");
-	
-	const { d: data } = event;
-
-	const channel = client.channels.cache.get(data.channel_id) || await user.createDM();
-
-	// if the message is already in the cache, don't re-emit the event
-	//if (channel.messages.has(data.message_id)) return;
-	// if you're on the master/v12 branch, use `channel.messages.fetch()`
-	const msg = await channel.messages.fetch(data.message_id);
-	//console.log(msg)
-	let guild_id = msg.guildId;	// ギルドID
-
-	// カスタム絵文字のリアクションは `name:ID` 形式でキーイングされますが、ユニコード絵文字は名前でキーイングされます。
-	// master/v12 ブランチを使用している場合、カスタム絵文字のリアクションは ID がキーになります。
-	// 何の絵文字が押されたか
-	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
-	let reaction = '';
-	if( data.emoji.id == null ){	// 通常絵文字
-		reaction = msg.reactions.cache.get(emojiKey);	}
-	else{												 // カスタム絵文字
-		reaction = msg.reactions.cache.get(data.emoji.id);
-	}
-	console.log("emojiKey:" + emojiKey);
-	//console.log(reaction);
-	
-	let name = event.d.user_id;
-	//let users = reaction.message.guild.members.resolve(name)
-	//console.log(event);
-	console.log("name:" + name);
-	//console.log("users:" + users);
-
-	let boss = '';
-
 	// リアクションを入れた時に処理
 	if( event.t == 'MESSAGE_REACTION_ADD' ){
+
+		console.log("MESSAGE_REACTION_ADD");
+
+		const { d: data } = event;
+
+		const channel = client.channels.cache.get(data.channel_id) || await user.createDM();
+
+		// if the message is already in the cache, don't re-emit the event
+		//if (channel.messages.has(data.message_id)) return;
+		// if you're on the master/v12 branch, use `channel.messages.fetch()`
+		const msg = await channel.messages.fetch(data.message_id);
+		//console.log(msg)
+		let guild_id = msg.guildId;	// ギルドID
+
+		// カスタム絵文字のリアクションは `name:ID` 形式でキーイングされますが、ユニコード絵文字は名前でキーイングされます。
+		// master/v12 ブランチを使用している場合、カスタム絵文字のリアクションは ID がキーになります。
+		// 何の絵文字が押されたか
+		const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+		let reaction = '';
+		if( data.emoji.id == null ){	// 通常絵文字
+			reaction = msg.reactions.cache.get(emojiKey);	}
+		else{												 // カスタム絵文字
+			reaction = msg.reactions.cache.get(data.emoji.id);
+		}
+		console.log("emojiKey:" + emojiKey);
+		//console.log(reaction);
+
+		let name = event.d.user_id;
+		//let users = reaction.message.guild.members.resolve(name)
+		//console.log(event);
+		console.log("name:" + name);
+		//console.log("users:" + users);
+
+		let boss = '';
+
 		// 予約回り。ボス名毎のリアクションボタンによる反応
 		if( msg.content.match(/^■(.*?)/) ){
 			boss = msg.content.match(/^■(.*?)/);
@@ -166,9 +167,9 @@ async function Reaction_Main( client, event, user){
 			//console.log("user:" + user);
 			//await reaction.users.remove(user); // 来たリアクションをそのまま消す。
 		}
+		//message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
+		return {reaction};
 	}
-	//message.reactions.cache.get('484535447171760141').remove().catch(error => console.error('Failed to remove reactions: ', error));
-	return {reaction};
 }
 
 async function Reaction_Output(msg){
