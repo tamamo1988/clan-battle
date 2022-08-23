@@ -7,6 +7,8 @@ const procmd = require('./progress');
 // ボスの名前関連
 async function Main_Boss(msg, text, other_name, set_day){
 
+	let [start_day, period, Level_List, BOSS_HP, Boss_Name, Boss_Icon, BOSS_NO] = await cmd.Setting();
+
 	text = text.replace("　", " ");	// 全角スペースを半角に 
 	text = text.replace(/ +/g, " ");	// 半角スペースが複数あったらひとつに
 	text = text.replace(/\//g, "");	// スラッシュ削除
@@ -69,16 +71,16 @@ async function Main_Boss(msg, text, other_name, set_day){
 		}
 
 		DataAry_Sub = DataAry_Sub.filter(Boolean);	// 空白削除
-		if( DataAry_Sub.length > 1 && DataAry_Sub.length < cmd.Level_List.length + 1 ){	// ID以外にHPがない場合は1 HPが5個ある場合は6になる
-			msg.reply(`弟くん、HPを入れる場合は${cmd.Level_List.length}個入れてね`);	
+		if( DataAry_Sub.length > 1 && DataAry_Sub.length < Level_List.length + 1 ){	// ID以外にHPがない場合は1 HPが5個ある場合は6になる
+			msg.reply(`弟くん、HPを入れる場合は${Level_List.length}個入れてね`);	
 			return;
 		}
-		else if( DataAry_Sub.length > cmd.Level_List.length + 1 ){
-			msg.reply(`弟くん、HPを入れる場合は${cmd.Level_List.length}個入れてね`);	
+		else if( DataAry_Sub.length > Level_List.length + 1 ){
+			msg.reply(`弟くん、HPを入れる場合は${Level_List.length}個入れてね`);	
 			return;
 		}
 		// HPを入力する場合
-		if(  DataAry_Sub.length == cmd.Level_List.length + 1 ){
+		if(  DataAry_Sub.length == Level_List.length + 1 ){
 			for( let i = 1; i < DataAry_Sub.length; i++ ){
 				if( DataAry_Sub[i].match(/[^0-9]/) ){
 					msg.reply(`弟くん、HPを入れる時は数字だけにしてほしいな`);	
@@ -102,7 +104,7 @@ async function Main_Boss(msg, text, other_name, set_day){
 		ValueAry = ValueAry.filter(Boolean);	// 空白削除
 		let hp_text = '';
 		// HPを入力する場合
-		if(  DataAry_Sub.length == cmd.Level_List.length + 1 ){
+		if(  DataAry_Sub.length == Level_List.length + 1 ){
 			hp_text = 'HPも';
 			BossAry[id] = `${name}\t`;			// ボスの名前を変更する
 			if( picture_name ){	ValueAry[1] = picture_name;	}	// 画像を変える場合
