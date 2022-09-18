@@ -104,6 +104,9 @@ async function Info_Update(){
 					else if( body.data[i].campaign[h].category == 91 ){	// マスターコインX倍キャンペーン　92はおそらく取得量の方
 						category_flag = "Master";
 					}
+					else if( body.data[i].campaign[h].category == 541 ){	// ＳＰダンジョン
+						category_flag = "SPDungeon";
+					}
 					else if( body.data[i].campaign[h].category == 151	){ // イベントノーマル経験値1.5倍 ハード152もあるが基本一緒
 						category_flag = "";
 						let start_flag = body.data[i].campaign[h].start.match(/([0-9]{1,4})/g);	// 左から年、月、日、時、分、秒を取る
@@ -840,7 +843,11 @@ function Name_Omission(type, name, value){
 		let set_value = value / 1000;
 		name += `${set_value}倍キャンペーン`
 	}
-	name = name.replace("\\n", " ");
+	// SPダンジョンにvalueの2000ついてるから前の挙動を消すように修正
+	if( type == 'SPDungeon' ){ name = 'SPダンジョン';	}
+
+	name = name.replace("　", " ");	// 全角の空白を半角に
+	name = name.replace("\\n", " ");	// 改行を空白に
 	// ここからちょっと特殊
 	if( name.match(/★3確定プラチナガチャ/) ){
 		name = '★3確定プラチナガチャ';
